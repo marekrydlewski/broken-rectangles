@@ -22,12 +22,12 @@ if __name__ == "__main__":
         img = imutils.rotate_bound(img, angle=angle)
 
         # crop
-        ret, thresh = cv2.threshold(img, 127, 255, 0)
-        im2, contours, hierarchy = cv2.findContours(thresh, 1, 2)
-        cnt = contours[0]
-        rect = cv2.minAreaRect(cnt)
-        box = cv2.boxPoints(rect)
-        box = np.int0(box)
+        # ret, thresh = cv2.threshold(img, 127, 255, 0)
+        # im2, contours, hierarchy = cv2.findContours(thresh, 1, 2)
+        # cnt = contours[0]
+        # rect = cv2.minAreaRect(cnt)
+        # box = cv2.boxPoints(rect)
+        # box = np.int0(box)
         # img = img[box[1, 1]:box[3, 1], box[0, 0]:box[2, 0]]
 
         plt.imshow(img, cmap='gray')

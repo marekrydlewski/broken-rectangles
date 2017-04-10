@@ -30,34 +30,21 @@ if __name__ == "__main__":
         box = cv2.boxPoints(rect)
         box = np.int0(box)
         # img = cv2.drawContours(img, [box], 0, (125, 0, 255), 2)
-        print box
         A = np.array(box)
         minA = np.min(A, axis=0)
         maxA = np.max(A, axis=0)
-        print img[minA[1] + int((maxA[1] - minA[1]) / 2), minA[0] + 50]
-        print img[minA[1], minA[0] + int((maxA[0] - minA[0]) / 2)]
-        print img[minA[1] + int((maxA[1] - minA[1]) / 2), maxA[0]]
-        print img[maxA[1], minA[0] + int((maxA[0] - minA[0]) / 2)]
-
-        # cv2.circle(img, (minA[0] + int((maxA[0] - minA[0]) / 2), minA[1]), 1, (100, 100, 0), -1)
-        # cv2.circle(img, (minA[0] + int((maxA[0] - minA[0]) / 2), maxA[1]), 1, (100, 100, 0), -1)
-        cv2.circle(img, (minA[0], minA[1] + int((maxA[1] - minA[1]) / 2)), 1, (100, 100, 0), -1)
 
         left_side = []
         good_night_right_side = []
         for i in range(minA[1], maxA[1]):
             left_side.append(img[i, minA[0]])
             good_night_right_side.append(img[i, maxA[0]])
-        print left_side
-        print good_night_right_side
         upper_side = []
         bottom_side = []
 
         for i in range(minA[0], maxA[0]):
             upper_side.append(img[minA[1], i])
             bottom_side.append(img[maxA[1], i])
-        print upper_side
-        print bottom_side
 
         side_with_lowest_sum = np.argmin(
             [sum(upper_side), sum(bottom_side), sum(left_side), sum(good_night_right_side)])
@@ -69,7 +56,6 @@ if __name__ == "__main__":
         elif side_with_lowest_sum == 3:
             img = imutils.rotate_bound(img, angle=270)
 
-        # img = img[box[1, 1]:box[3, 1], box[0, 0]:box[2, 0]]
         # img = img[minA[1]:maxA[1], minA[0]:maxA[0]]
 
         plt.imshow(img, cmap='gray')

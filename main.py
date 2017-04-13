@@ -2,13 +2,18 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import imutils
+import os
 
 if __name__ == "__main__":
-    for i in range(20):
-        # if i != 1:
+    folder = 'data/set1/'
+    files = os.listdir(folder)
+    files = [image_file for image_file in files if image_file.endswith('.png')]
+    print files
+    for image_file in files:
+        # if i != 5:
         #     continue
 
-        img = cv2.imread('data/set1/' + str(i) + '.png', 0)
+        img = cv2.imread('data/set1/' + image_file, 0)
         ret, thresh = cv2.threshold(img, 127, 255, 0)
         im2, contours, hierarchy = cv2.findContours(thresh, 1, 2)
         cnt = contours[0]
@@ -25,11 +30,19 @@ if __name__ == "__main__":
         # crop
         ret, thresh = cv2.threshold(img, 127, 255, 0)
         im2, contours, hierarchy = cv2.findContours(thresh, 1, 2)
-        cnt = contours[0]
+        contour_nr = 0
+        while contour_nr < len(contours) and len(contours[contour_nr]) < 10:
+            contour_nr += 1
+
+        print contour_nr
+        cnt = contours[contour_nr]
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
         box = np.int0(box)
+        print len(contours)
+        print contours[0]
         # img = cv2.drawContours(img, [box], 0, (125, 0, 255), 2)
+        # cv2.circle(img, (164, 27), 5, (100, 100, 0), -1)
         A = np.array(box)
         minA = np.min(A, axis=0)
         maxA = np.max(A, axis=0)

@@ -15,7 +15,7 @@ def mydist(x, y):
 
 
 if __name__ == "__main__":
-    folder = 'data/set1/'
+    folder = 'data/set4/'
     files = os.listdir(folder)
     files = [image_number for image_number in files if image_number.endswith('.png')]
     # print files
@@ -104,14 +104,19 @@ if __name__ == "__main__":
         img = img[:, ::10]
         points = []
         for x in range(100):
+            added = False
             for y in range(1000):
                 if img[y, x] > 0:
                     points.append(y)
+                    added = True
                     break
+            if not added:
+                points.append(1000)
 
                     # plt.imshow(img, cmap='gray')
                     # plt.show()
         feature.append(points)
+
     nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree', metric=mydist).fit(feature)
     distances, indices = nbrs.kneighbors(feature)
     # print indices

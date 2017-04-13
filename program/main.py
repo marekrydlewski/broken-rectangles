@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import imutils
 import os
-import stat
+import sys
 
 
 def mydist(x, y):
@@ -15,17 +15,18 @@ def mydist(x, y):
 
 
 if __name__ == "__main__":
-    folder = 'data/set1/'
+    folder = sys.argv[1]
+    N = int(sys.argv[2])
     files = os.listdir(folder)
     files = [image_number for image_number in files if image_number.endswith('.png')]
     # print files
     feature = []
-    for image_number in range(len(files)):
+    for image_number in range(N):
         # if image_number not in [0, 6]:
         #     continue
         # print image_number
 
-        img = cv2.imread(folder + str(image_number) + '.png', 0)
+        img = cv2.imread(folder + '/'+ str(image_number) + '.png', 0)
         ret, thresh = cv2.threshold(img, 127, 255, 0)
         im2, contours, hierarchy = cv2.findContours(thresh, 1, 2)
         contour_nr = 0

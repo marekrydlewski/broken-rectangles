@@ -68,14 +68,14 @@ if __name__ == "__main__":
     os.chmod(program_path, os.stat(program_path).st_mode | 0o100)  # stat.S_IEXEC)
 
     dirs = [('set0', 6),
-            ('set1', 20),
-            ('set2', 20),
-            ('set3', 20),
-            ('set4', 20),
-            ('set5', 200),
-            ('set6', 200),
-            ('set7', 20),
-            ('set8', 100)]
+            # ('set1', 20),
+            # ('set2', 20),
+            # ('set3', 20),
+            # ('set4', 20),
+            # ('set5', 200),
+            # ('set6', 200),
+            # ('set7', 20),
+            ('set1', 20)]
 
     print("WYNIKI:")
     total = []
